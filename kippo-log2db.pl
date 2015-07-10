@@ -3,7 +3,7 @@
 # Name:    kippo-log2db.pl
 # Author:  Jim Clausing
 # Date:    2015-01-28
-# Version: 0.9
+# Version: 1.0
 #
 # This script was inspired by kippo2mysql by Ioannis “Ion” Koniaris
 # (bruteforce.gr/kippo2mysql) which I really liked, but that script 
