@@ -2,8 +2,8 @@
 #
 # Name:    kippo-log2db.pl
 # Author:  Jim Clausing
-# Date:    2015-01-28
-# Version: 1.0
+# Date:    2016-01-19
+# Version: 1.1
 #
 # This script was inspired by kippo2mysql by Ioannis “Ion” Koniaris
 # (bruteforce.gr/kippo2mysql) which I really liked, but that script 
@@ -95,7 +95,7 @@ foreach $file (@files) {
 	};
 	$sth_snsr_qry->execute($3);
 	my @id;
-	@id = $sth_clnt_qry->fetchrow_array;
+	@id = $sth_snsr->fetchrow_array;
 	$sensors{$3} = $id[0];
 	$ip{$4} = $2;
     };
@@ -122,7 +122,7 @@ foreach $file (@files) {
 # 2014-02-14 00:24:13-0500 [HoneyPotTransport,201234,218.2.22.110] connection lost
     if (/^(\S+ \S+) \[HoneyPotTransport,(\d+),\d+\.\d+\.\d+\.\d+\] connection lost/) {
 	$end{$2} = $1;
-	$sth_sess_ins->execute($2, $start{$2}, $end{$2}, $sensors{$2}, $ip{$2}, (defined $termsize{$2}?$termsize:NULL), $client{$2});
+	$sth_sess_ins->execute($2, $start{$2}, $end{$2}, $sensors{$sensor{$2}}, $ip{$2}, (defined $termsize{$2}?$termsize:NULL), $client{$2});
     };
 # 2014-02-14 08:55:49-0500 [SSHChannel session (0) on SSHService ssh-connection on HoneyPotTransport,201280,199.227.127.54] Opening TTY log: log/tty/20140214-085549-9688.log
     if (/HoneyPotTransport,(\d+),\d+\.\d+\.\d+\.\d+\] Opening TTY log: (\S+)$/) {
