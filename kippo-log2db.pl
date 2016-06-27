@@ -95,7 +95,7 @@ foreach $file (@files) {
 	};
 	$sth_snsr_qry->execute($3);
 	my @id;
-	@id = $sth_snsr->fetchrow_array;
+	@id = $sth_snsr_query->fetchrow_array;
 	$sensors{$3} = $id[0];
 	$ip{$4} = $2;
     };
