@@ -3,7 +3,7 @@
 # Name:    kippo-log2db.pl
 # Author:  Jim Clausing
 # Date:    2016-07-14
-# Version: 1.2.1
+# Version: 1.3
 #
 # This script was inspired by kippo2mysql by Ioannis “Ion” Koniaris
 # (bruteforce.gr/kippo2mysql) which I really liked, but that script 
@@ -23,15 +23,25 @@
 #use strict;
 #use warnings; #enable for debugging
 use DBI;
+use Getopt::Std;
 
 my (%start, %end, %sensor, %sensors, %ip, %termsize, %client) = ();
+
+getopts('hr:l:');
+
+die '$0 [-h] [-r <kippo root dir>] [-l <kippo log dir>]
+
+	-h		print this message
+	-r <dir>	kippo root directory (to find dl and tty directories)
+	-l <dir>	kippo log directory
+' if $opt_h;
 
 #Paths to various kippo components - change accordingly!
 #
 #Root/config directory
-my $kipporootdir = '.';
+my $kipporootdir = defined($opt_r)?$opt_r:'.';
 #Log directory
-my $kippologdir = '.';
+my $kippologdir = defined($opt_l)?$opt_l:'.';
 
 my $cnt = 0; 
 
