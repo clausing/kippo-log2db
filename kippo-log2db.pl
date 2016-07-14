@@ -2,8 +2,8 @@
 #
 # Name:    kippo-log2db.pl
 # Author:  Jim Clausing
-# Date:    2016-01-19
-# Version: 1.1
+# Date:    2016-07-14
+# Version: 1.2.1
 #
 # This script was inspired by kippo2mysql by Ioannis “Ion” Koniaris
 # (bruteforce.gr/kippo2mysql) which I really liked, but that script 
@@ -95,7 +95,7 @@ foreach $file (@files) {
 	};
 	$sth_snsr_qry->execute($3);
 	my @id;
-	@id = $sth_snsr_query->fetchrow_array;
+	@id = $sth_snsr_qry->fetchrow_array;
 	$sensors{$3} = $id[0];
 	$ip{$4} = $2;
     };
