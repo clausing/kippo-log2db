@@ -3,7 +3,7 @@
 # Name:    kippo-log2db.pl
 # Author:  Jim Clausing
 # Date:    2016-07-14
-# Version: 1.3
+# Version: 1.3.1
 #
 # This script was inspired by kippo2mysql by Ioannis “Ion” Koniaris
 # (bruteforce.gr/kippo2mysql) which I really liked, but that script 
@@ -27,13 +27,16 @@ use Getopt::Std;
 
 my (%start, %end, %sensor, %sensors, %ip, %termsize, %client) = ();
 
-getopts('hr:l:');
+getopts('hr:l:D:p:');
 
-die '$0 [-h] [-r <kippo root dir>] [-l <kippo log dir>]
+die '$0 [-h] [-r <kippo root dir>] [-l <kippo log dir>] [-D <db user>] [-p <pw>]
+Kippo-log2db v 1.3
 
 	-h		print this message
 	-r <dir>	kippo root directory (to find dl and tty directories)
 	-l <dir>	kippo log directory
+	-D <user>	kippo database username
+	-p <pw>		kippo database password
 ' if $opt_h;
 
 #Paths to various kippo components - change accordingly!
@@ -46,8 +49,8 @@ my $kippologdir = defined($opt_l)?$opt_l:'.';
 my $cnt = 0; 
 
 #MySQL server values - change accordingly!
-$sql_user = '<kippo db user>';
-$sql_password = '<kippo db passwd>';
+$sql_user = defined($opt_D)?$opt_D:'<kippo db user>';
+$sql_password = defined($opt_p)?$opt_p:'<kippo db passwd>';
 $database = 'kippo';
 $hostname = 'localhost';
 $port = '3306';
