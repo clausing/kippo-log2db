@@ -24,10 +24,11 @@
 #use warnings; #enable for debugging
 use DBI;
 use Getopt::Std;
+use Scalar::Util qw(looks_like_number);
 
 my (%start, %end, %sensor, %sensors, %ip, %termsize, %client) = ();
 
-getopts('hr:l:D:p:');
+getopts('hr:l:D:p:s:');
 
 die '$0 [-h] [-r <kippo root dir>] [-l <kippo log dir>] [-D <db user>] [-p <pw>]
 Kippo-log2db v 1.3
@@ -37,7 +38,8 @@ Kippo-log2db v 1.3
 	-l <dir>	kippo log directory
 	-D <user>	kippo database username
 	-p <pw>		kippo database password
-' if $opt_h;
+	-s <start>	file to start with (number)
+' if $opt_h || (defined $opt_s && !looks_like_number($opt_s));
 
 #Paths to various kippo components - change accordingly!
 #
@@ -93,6 +95,10 @@ This could take some time to complete.
 chdir $kippologdir;
 @files = `ls -1rt kippo.log*`;
 foreach $file (@files) {
+  if (defined $opt_s) {
+    @parts = split /\./, $file;
+    next if $parts[2] > $opt_s;
+  }
   open (IN, $file) || die "Can't open log stream: $!\n";
   print "\n$file\n";
   while (<IN>) {
