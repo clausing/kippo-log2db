@@ -2,8 +2,8 @@
 #
 # Name:    kippo-log2db.pl
 # Author:  Jim Clausing
-# Date:    2016-07-14
-# Version: 1.3.1
+# Date:    2016-07-20
+# Version: 1.3.2
 #
 # This script was inspired by kippo2mysql by Ioannis “Ion” Koniaris
 # (bruteforce.gr/kippo2mysql) which I really liked, but that script 
@@ -31,7 +31,7 @@ my (%start, %end, %sensor, %sensors, %ip, %termsize, %client) = ();
 getopts('hr:l:D:p:s:');
 
 die '$0 [-h] [-r <kippo root dir>] [-l <kippo log dir>] [-D <db user>] [-p <pw>]
-Kippo-log2db v 1.3
+Kippo-log2db v 1.3.2
 
 	-h		print this message
 	-r <dir>	kippo root directory (to find dl and tty directories)
