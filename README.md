@@ -12,4 +12,4 @@ nicely and can be rsync-ed to the system where the DB resides.
 
 Send any feedback to me at jclausing@isc.sans.edu or handlers@sans.edu.
  
-This file is distributed under the terms of GPLv3.
+This script is distributed under the terms of BSD-3-Clause license
